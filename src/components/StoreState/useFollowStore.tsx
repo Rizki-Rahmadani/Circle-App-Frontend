@@ -2,8 +2,8 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
 export interface FollowedUser {
-  avatarUrl: string;
   id: number;
+  avatarUrl: string;
   username: string;
   fullname: string;
 }
