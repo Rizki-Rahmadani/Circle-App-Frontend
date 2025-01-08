@@ -8,8 +8,9 @@ import { useNavigate } from 'react-router-dom';
 interface SuggestedUser {
   id: number;
   fullname: string;
-  avatarUrl: string;
-
+  profile: {
+    avatarUrl: string;
+  };
   username: string;
   followersCount: number;
 }
@@ -55,7 +56,7 @@ const Suggested = () => {
       await toggleFollow(user.id, token);
       followUser({
         id: user.id,
-        avatarUrl: user.avatarUrl,
+        avatarUrl: user.profile?.avatarUrl,
         username: user.username,
         fullname: user.fullname,
       });
@@ -86,7 +87,7 @@ const Suggested = () => {
                   borderWidth={2}
                   borderColor={'whitekAlpha.100'}
                   src={
-                    suggest.avatarUrl ||
+                    suggest.profile?.avatarUrl ||
                     `https://ui-avatars.com/api/?name=${suggest.fullname}&background=27272a&rounded=true&size=60&color=ffffff`
                   }
                   boxSize={'40px'}

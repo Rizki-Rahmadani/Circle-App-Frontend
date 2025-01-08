@@ -20,7 +20,10 @@ const ProfilePage = () => {
           width={'5xl'}
           maxHeight={'36'}
           rounded={'md'}
-          src="https://th.bing.com/th/id/R.477f155981dd60768f60ea6f96449b97?rik=YdTS%2f68zhyK6ww&riu=http%3a%2f%2fpapers.co%2fwallpaper%2fpapers.co-sm60-cool-pastel-blur-gradation-green-25-wallpaper.jpg&ehk=RIbtW5PPA10yMRKZ%2flnZGPXJ2xY1pSoqpz3ZOduqDE8%3d&risl=&pid=ImgRaw&r=0"
+          src={
+            user?.backgroundUrl ||
+            'https://p4.wallpaperbetter.com/wallpaper/324/576/1010/green-emerald-blue-gradation-wallpaper-preview.jpg'
+          }
         />
         <Image
           borderWidth={3}
@@ -75,7 +78,7 @@ const ProfilePage = () => {
         </div>
         <div className="flex gap-2">
           <Text textStyle="lg" fontWeight="medium" letterSpacing="tight">
-            {user?.followersCount || 0}
+            {user?.followersCount}
           </Text>
           <Text
             textStyle="lg"

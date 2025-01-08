@@ -23,8 +23,6 @@ export const updateProfile = async (
       formData.append('background', backgroundFile);
     }
 
-    console.log('Form Data:', formData);
-
     const res: AxiosResponse = await axios.put(apiURL + 'profile', formData, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -32,7 +30,6 @@ export const updateProfile = async (
       },
     });
 
-    console.log('Result:', res);
     console.log('API Response:', res.data);
     const data = res.data.data;
     const updatedUser = { ...data.updatedProfile, ...data.updatedUser };

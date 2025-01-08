@@ -1,16 +1,19 @@
 import { useEffect, useMemo } from 'react';
-import { Button, Image, Text } from '@chakra-ui/react';
-import { HiChat } from 'react-icons/hi';
+import { Box, Flex, Image, Text } from '@chakra-ui/react';
 import useReplyStore from './StoreState/replyStore';
 import ButtonLikeReply from './Button/ButtonLikeReply';
 import { useRelativeTime } from '@/hooks/useRelativeTime';
+import DeleteReply from './DeleteReply';
 
 interface ReplyComponentProps {
   threadId: number | undefined;
+  threadAuthorId: number | null;
 }
 
-function ReplyComponent({ threadId }: ReplyComponentProps) {
+function ReplyComponent({ threadId, threadAuthorId }: ReplyComponentProps) {
   const { replies, isLoading, error, fetchReplies } = useReplyStore();
+
+  const currentUser = JSON.parse(localStorage.getItem('user') || '{}');
 
   // Hitung waktu relatif untuk semua balasan menggunakan useMemo
   const relativeTimes = useMemo(
@@ -57,15 +60,28 @@ function ReplyComponent({ threadId }: ReplyComponentProps) {
           <div>
             <div className="flex flex-col">
               <div className="flex">
-                <Text pl={5} textStyle={'sm'}>
+                <Text pl={5} textStyle={'lg'}>
                   {reply.author?.fullname || 'Unknown'}
                 </Text>
-                <Text textStyle={'xs'} pl={2} color={'gray.400'}>
-                  @{reply.author?.username || 'Anonymous'} •{' '}
-                  {relativeTimes[index]}
-                </Text>
+                <Flex justifyContent="space-between" w="sm">
+                  <Box>
+                    <Text textStyle={'sm'} pl={2} color={'gray.400'}>
+                      @{reply.author?.username || 'Anonymous'} •{' '}
+                      {relativeTimes[index]}
+                    </Text>
+                  </Box>
+                  <Box>
+                    <DeleteReply
+                      replyId={reply.id}
+                      currentUserId={currentUser.id} // ID pengguna yang sedang login
+                      authorId={reply.author.id} // ID pembuat reply
+                      threadAuthorId={threadAuthorId!} // ID pemilik thread
+                      onReplyDeleted={() => fetchReplies(threadId!)} // Refresh daftar reply setelah delete
+                    />
+                  </Box>
+                </Flex>
               </div>
-              <Text pl={5} textStyle={'sm'} color={'gray.400'}>
+              <Text pl={5} textStyle={'lg'} color={'gray.400'}>
                 {reply.comment || 'No comment'}
               </Text>
               {reply.image && (
@@ -76,10 +92,6 @@ function ReplyComponent({ threadId }: ReplyComponentProps) {
             </div>
             <div className="flex gap-4 pl-3 pt-2">
               <ButtonLikeReply reply={reply}></ButtonLikeReply>
-              <Button textStyle={'sm'}>
-                <HiChat />
-                Reply
-              </Button>
             </div>
           </div>
         </li>

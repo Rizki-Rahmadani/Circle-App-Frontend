@@ -93,13 +93,13 @@ const TabsProfile = () => {
                       <Text pl={5} textStyle={'lg'}>
                         {thread.author.fullname}
                       </Text>
-                      <Text textStyle={'xs'} pl={5} color={'gray.400'}>
+                      <Text textStyle={'sm'} pl={5} color={'gray.400'}>
                         @{thread.author.username}
                       </Text>
                     </div>
                   </div>
                   <div>
-                    <Text textStyle={'sm'} pl={5} color={'gray.400'}>
+                    <Text textStyle={'lg'} pl={5} color={'gray.400'}>
                       {thread.content}
                     </Text>
                     {thread.image && (
@@ -114,7 +114,7 @@ const TabsProfile = () => {
                       </div>
                     )}
                   </div>
-                  <div className="flex gap-4 text-sm">
+                  <div className="flex gap-4 text-sm pl-5">
                     <div className="flex items-center gap-1">
                       <ButtonLike
                         thread={thread}
@@ -170,13 +170,16 @@ const TabsProfile = () => {
         </Tabs.Root>
       </main>
 
-      <ImageDialog
-        threads={threads}
-        threadId={currentThreadId!}
-        isOpen={isDialogOpen}
-        onClose={() => setIsDialogOpen(false)}
-        imageUrl={imageUrl}
-      />
+      {isDialogOpen && currentThreadId !== null && (
+        <ImageDialog
+          threads={threads}
+          threadId={currentThreadId}
+          isOpen={isDialogOpen}
+          onClose={() => setIsDialogOpen(false)}
+          imageUrl={imageUrl}
+          onUpdate={handleUpdateThread}
+        />
+      )}
     </Flex>
   );
 };

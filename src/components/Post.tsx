@@ -1,4 +1,4 @@
-import { Button, Icon, Image, Text } from '@chakra-ui/react';
+import { Box, Button, Flex, Icon, Image, Text } from '@chakra-ui/react';
 import { HiChat } from 'react-icons/hi';
 
 import { useNavigate } from 'react-router-dom';
@@ -56,16 +56,34 @@ function Post() {
           fit="cover"
         />
         <div className="flex flex-col">
-          <div onClick={() => navigate(`/status/${thread.id}`)}>
-            <div className="flex">
-              <Text pl={5} textStyle={'sm'}>
-                {thread.author?.fullname}
-              </Text>
-              <Text textStyle={'xs'} pl={2} color={'gray.400'}>
+          <div className="flex">
+            <Text pl={5} textStyle={'lg'}>
+              {thread.author?.fullname}
+            </Text>
+            <Flex justifyContent={'space-between'} w="4xl">
+              <Text textStyle={'sm'} pl={2} color={'gray.400'}>
                 @{thread.author?.username} • {relativeTime}
               </Text>
-            </div>
-            <Text pl={5} textStyle={'sm'} color={'gray.400'}>
+              <Box>
+                {currentUser?.id === thread.authorId && (
+                  <div>
+                    <ThreadOptions
+                      threadId={thread.id}
+                      authorId={thread.authorId}
+                      currentUserId={currentUser?.id || 0}
+                      content={thread.content}
+                      onThreadDeleted={() => handleThreadDeleted(thread.id)}
+                      onThreadUpdated={(newContent) =>
+                        handleThreadUpdated(thread.id, newContent)
+                      }
+                    />
+                  </div>
+                )}
+              </Box>
+            </Flex>
+          </div>
+          <div onClick={() => navigate(`/status/${thread.id}`)}>
+            <Text pl={5} textStyle={'lg'} color={'gray.400'}>
               {thread.content}
             </Text>
             {thread.image && (
@@ -83,20 +101,6 @@ function Post() {
               </Icon>
               {thread._count.replies || 0} Replies
             </Button>
-            {currentUser?.id === thread.authorId && (
-              <div>
-                <ThreadOptions
-                  threadId={thread.id}
-                  authorId={thread.authorId}
-                  currentUserId={currentUser?.id || 0}
-                  content={thread.content}
-                  onThreadDeleted={() => handleThreadDeleted(thread.id)}
-                  onThreadUpdated={(newContent) =>
-                    handleThreadUpdated(thread.id, newContent)
-                  }
-                />
-              </div>
-            )}
           </div>
         </div>
       </li>

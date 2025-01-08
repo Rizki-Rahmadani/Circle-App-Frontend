@@ -65,3 +65,29 @@ export const createReply = async (
     }
   }
 };
+
+export const deleteReply = async (replyId: number): Promise<void> => {
+  const token = localStorage.getItem('auth-token');
+
+  if (!token) {
+    throw new Error('User is not authenticated');
+  }
+
+  try {
+    await axios.delete(apiURL + `thread/reply/${replyId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.error('Axios Error:', error.response?.data || error.message);
+      throw new Error(
+        error.response?.data?.message || 'Failed to delete reply'
+      );
+    } else {
+      console.error('Unexpected Error:', error);
+      throw error;
+    }
+  }
+};

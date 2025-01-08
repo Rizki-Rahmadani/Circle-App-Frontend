@@ -1,14 +1,15 @@
-import { Box, Button, Icon, Image, Text } from '@chakra-ui/react';
+import { Button, Icon, Text } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { HiChat } from 'react-icons/hi';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import ImageDialog from '@/components/ImageDialog';
+import { Avatar } from './ui/avatar';
 import { getThreadById } from '@/features/dashboard/services/thread.services';
 import { ThreadType } from '@/types/threads.type';
 import CreateReply from '@/components/CreateReply';
 import useReplyStore from './StoreState/replyStore';
-import ButtonLike from './Button/ButtonLike';
 import ReplyComponent from './ReplyComponent';
+import ButtonLike from './Button/ButtonLike';
 
 function StatusComponent() {
   const { id } = useParams<{ id: string }>();
@@ -16,7 +17,6 @@ function StatusComponent() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [imageUrl, setImageUrl] = useState<string>('');
   const [currentThreadId, setCurrentThreadId] = useState<number | null>(null);
-  const navigate = useNavigate();
   const { replies } = useReplyStore();
 
   useEffect(() => {
@@ -46,18 +46,17 @@ function StatusComponent() {
     }
   };
 
+  const handleUpdateThread = (updatedThread: ThreadType) => {
+    const updatedThreads = threads?.map((thread) =>
+      thread.id === updatedThread.id ? updatedThread : thread
+    );
+    setThreads(updatedThreads || []);
+  };
+
   const handleImageClick = (image: string, threadId: number) => {
     setImageUrl(image);
     setCurrentThreadId(threadId);
     setIsDialogOpen(true);
-  };
-
-  const handleUpdateThread = (updatedThread: ThreadType) => {
-    if (!threads) return;
-    const updatedThreads = threads.map((thread) =>
-      thread.id === updatedThread.id ? updatedThread : thread
-    );
-    setThreads(updatedThreads);
   };
 
   if (!threads || threads.length === 0) {
@@ -68,36 +67,22 @@ function StatusComponent() {
     <div>
       {threads.map((thread, index) => (
         <div key={index}>
-          <Box
-            className="flex flex-col px-5 gap-4 border-neutral-500"
-            borderBottomWidth="1px"
-          >
-            <div
-              className="flex"
-              onClick={() => navigate(`/profile/${thread.author.id}`)}
-            >
-              <Image
-                borderWidth={3}
-                borderColor={'blackAlpha.600'}
-                src={
-                  thread.author?.profile?.avatarUrl ||
-                  `https://ui-avatars.com/api/?name=${thread.author?.fullname}&background=27272a&rounded=true&size=60&color=ffffff`
-                }
-                boxSize={'50px'}
-                borderRadius="full"
-                fit="cover"
+          <div className="flex flex-col px-5 gap-4">
+            <div className="flex">
+              <Avatar
+                src={thread.author?.profile?.avatarUrl || 'default-avatar-url'}
               />
               <div>
                 <Text pl={5} textStyle={'lg'}>
                   {thread.author?.fullname || 'Unknown Author'}
                 </Text>
-                <Text textStyle={'xs'} pl={5} color={'gray.400'}>
+                <Text textStyle={'sm'} pl={5} color={'gray.400'}>
                   @{thread.author?.username || 'Unknown Username'}
                 </Text>
               </div>
             </div>
             <div>
-              <Text textStyle={'sm'} color={'gray.400'}>
+              <Text textStyle={'lg'} color={'gray.400'}>
                 {thread.content || 'No content available'}
               </Text>
               <div
@@ -123,18 +108,24 @@ function StatusComponent() {
                 </Button>
               </div>
             </div>
-          </Box>
+          </div>
           <CreateReply threadId={thread.id.toString()} />
-          <ReplyComponent threadId={thread.id} />
+          <ReplyComponent
+            threadId={thread.id}
+            threadAuthorId={thread.author?.id}
+          />
         </div>
       ))}
-      <ImageDialog
-        threads={threads}
-        threadId={currentThreadId!}
-        isOpen={isDialogOpen}
-        onClose={() => setIsDialogOpen(false)}
-        imageUrl={imageUrl}
-      />
+      {isDialogOpen && currentThreadId !== null && (
+        <ImageDialog
+          threads={threads}
+          threadId={currentThreadId}
+          isOpen={isDialogOpen}
+          onClose={() => setIsDialogOpen(false)}
+          imageUrl={imageUrl}
+          onUpdate={handleUpdateThread}
+        />
+      )}
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Box,
   Button,
@@ -7,6 +7,7 @@ import {
   Stack,
   Textarea,
   Flex,
+  Portal,
 } from '@chakra-ui/react';
 import { HiMiniPhoto } from 'react-icons/hi2';
 import Swal from 'sweetalert2';
@@ -22,13 +23,17 @@ const EditProfileDialog: React.FC = () => {
   const [avatarFile, setAvatarFile] = useState<File | null>(null);
   const [backgroundFile, setBackgroundFile] = useState<File | null>(null);
 
-  const { register, handleSubmit } = useForm<EditProfileProps>({
-    defaultValues: {
-      username: user?.username || '',
-      fullname: user?.fullname || '',
-      bio: user?.bio || '',
-    },
-  });
+  const { register, handleSubmit, reset } = useForm<EditProfileProps>();
+
+  useEffect(() => {
+    if (user) {
+      reset({
+        username: user.username || '',
+        fullname: user.fullname || '',
+        bio: user.bio || '',
+      });
+    }
+  }, [user, reset]);
 
   // Handle avatar file selection
   const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -109,143 +114,145 @@ const EditProfileDialog: React.FC = () => {
       )}
 
       {isDialogOpen && (
-        <Box
-          position="fixed"
-          top="30%"
-          left="50%"
-          transform="translate(-50%, -50%)"
-          bg="black"
-          p={5}
-          borderRadius="md"
-          boxShadow="md"
-          width="90%"
-          height="90%"
-          maxHeight="450px"
-          maxWidth="500px"
-          zIndex={10}
-        >
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <Stack>
-              {/* Background Image */}
-              <Box position="relative" mb={4}>
-                <Image
-                  width={'lg'}
-                  height={100}
-                  objectFit="cover"
-                  rounded={'md'}
-                  src={
-                    backgroundFile
-                      ? URL.createObjectURL(backgroundFile)
-                      : user?.backgroundUrl ||
-                        'https://p4.wallpaperbetter.com/wallpaper/324/576/1010/green-emerald-blue-gradation-wallpaper-preview.jpg'
-                  }
-                  alt="Background"
-                />
-                <Button
-                  position="absolute"
-                  top={5}
-                  right={200}
-                  size={'2xl'}
-                  color="white"
-                  onClick={() => {
-                    const fileInput = document.getElementById(
-                      'background-upload'
-                    ) as HTMLInputElement;
-                    fileInput?.click();
-                  }}
-                >
-                  <HiMiniPhoto />
-                </Button>
-                <input
-                  type="file"
-                  id="background-upload"
-                  accept="image/*"
-                  style={{ display: 'none' }}
-                  onChange={handleBackgroundChange}
-                />
+        <Portal>
+          <Box
+            position="fixed"
+            top="30%"
+            left="50%"
+            transform="translate(-50%, -50%)"
+            bg="black"
+            p={5}
+            borderRadius="md"
+            boxShadow="md"
+            width="100%"
+            height="100%"
+            maxHeight="450px"
+            maxWidth="500px"
+            zIndex={5}
+          >
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <Stack>
+                {/* Background Image */}
+                <Box position="relative" mb={4}>
+                  <Image
+                    width={'lg'}
+                    height={100}
+                    objectFit="cover"
+                    rounded={'md'}
+                    src={
+                      backgroundFile
+                        ? URL.createObjectURL(backgroundFile)
+                        : user?.backgroundUrl ||
+                          'https://p4.wallpaperbetter.com/wallpaper/324/576/1010/green-emerald-blue-gradation-wallpaper-preview.jpg'
+                    }
+                    alt="Background"
+                  />
+                  <Button
+                    position="absolute"
+                    top={5}
+                    right={200}
+                    size={'2xl'}
+                    color="white"
+                    onClick={() => {
+                      const fileInput = document.getElementById(
+                        'background-upload'
+                      ) as HTMLInputElement;
+                      fileInput?.click();
+                    }}
+                  >
+                    <HiMiniPhoto />
+                  </Button>
+                  <input
+                    type="file"
+                    id="background-upload"
+                    accept="image/*"
+                    style={{ display: 'none' }}
+                    onChange={handleBackgroundChange}
+                  />
 
-                {/* Avatar Image */}
-                <Image
-                  src={
-                    avatarFile
-                      ? URL.createObjectURL(avatarFile)
-                      : user?.avatarUrl || 'https://via.placeholder.com/150'
-                  }
-                  boxSize="80px"
-                  borderRadius="full"
-                  borderWidth={2}
-                  borderColor="gray.500"
-                  alt="Avatar"
-                  position="absolute"
-                  top={16}
-                  left={5}
-                />
-                <Button
-                  position="absolute"
-                  top={20}
-                  left={10}
-                  color="white"
-                  onClick={() => {
-                    const fileInput = document.getElementById(
-                      'avatar-upload'
-                    ) as HTMLInputElement;
-                    fileInput?.click();
-                  }}
-                >
-                  <HiMiniPhoto />
-                </Button>
-                <input
-                  type="file"
-                  id="avatar-upload"
-                  accept="image/*"
-                  style={{ display: 'none' }}
-                  onChange={handleAvatarChange}
-                />
-              </Box>
+                  {/* Avatar Image */}
+                  <Image
+                    src={
+                      avatarFile
+                        ? URL.createObjectURL(avatarFile)
+                        : user?.avatarUrl || 'https://via.placeholder.com/150'
+                    }
+                    boxSize="80px"
+                    borderRadius="full"
+                    borderWidth={2}
+                    borderColor="gray.500"
+                    alt="Avatar"
+                    position="absolute"
+                    top={16}
+                    left={5}
+                  />
+                  <Button
+                    position="absolute"
+                    top={20}
+                    left={10}
+                    color="white"
+                    onClick={() => {
+                      const fileInput = document.getElementById(
+                        'avatar-upload'
+                      ) as HTMLInputElement;
+                      fileInput?.click();
+                    }}
+                  >
+                    <HiMiniPhoto />
+                  </Button>
+                  <input
+                    type="file"
+                    id="avatar-upload"
+                    accept="image/*"
+                    style={{ display: 'none' }}
+                    onChange={handleAvatarChange}
+                  />
+                </Box>
 
-              {/* Form Fields */}
-              <Flex direction="column" gap={3} mt="10">
-                <Input
-                  {...register('username', {
-                    required: 'Username is required',
-                  })}
-                  placeholder="Username"
-                  bg="gray.800"
-                  borderColor="green.500"
-                  _hover={{ borderColor: 'green.500' }}
-                />
-                <Input
-                  {...register('fullname')}
-                  placeholder="Full Name"
-                  bg="gray.800"
-                  borderColor="green.500"
-                  _hover={{ borderColor: 'green.500' }}
-                />
-                <Textarea
-                  {...register('bio')}
-                  placeholder="Bio"
-                  bg="gray.800"
-                  borderColor="green.500"
-                  _hover={{ borderColor: 'green.500' }}
-                />
+                {/* Form Fields */}
+                <Flex direction="column" gap={3} mt="10">
+                  <Input
+                    {...register('username', {
+                      required: 'Username is required',
+                    })}
+                    placeholder="Username"
+                    bg="gray.800"
+                    borderColor="green.500"
+                    _hover={{ borderColor: 'green.500' }}
+                  />
+                  <Input
+                    {...register('fullname')}
+                    placeholder="Full Name"
+                    bg="gray.800"
+                    borderColor="green.500"
+                    _hover={{ borderColor: 'green.500' }}
+                  />
+                  <Textarea
+                    {...register('bio')}
+                    placeholder="Bio"
+                    bg="gray.800"
+                    borderColor="green.500"
+                    _hover={{ borderColor: 'green.500' }}
+                  />
+                </Flex>
+              </Stack>
+
+              <Flex justify="space-between" mt="10">
+                <Button
+                  variant="outline"
+                  p="5"
+                  bg="red.500"
+                  onClick={() => setIsDialogOpen(false)}
+                >
+                  Cancel
+                </Button>
+                <Button variant="outline" p="5" bg="green.500" type="submit">
+                  Save
+                </Button>
               </Flex>
-            </Stack>
-
-            <Flex justify="space-between" mt="10">
-              <Button
-                variant="outline"
-                p="5"
-                bg="red.500"
-                onClick={() => setIsDialogOpen(false)}
-              >
-                Cancel
-              </Button>
-              <Button variant="outline" p="5" bg="green.500" type="submit">
-                Save
-              </Button>
-            </Flex>
-          </form>
-        </Box>
+            </form>
+          </Box>
+        </Portal>
       )}
 
       {/* Button to trigger the dialog */}

@@ -2,7 +2,6 @@ import { Box, Button, Icon, Image, Text } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { HiChat } from 'react-icons/hi';
 import { useNavigate, useParams } from 'react-router-dom';
-import ImageDialog from '@/components/ImageDialog';
 import { getThreadById } from '@/features/dashboard/services/thread.services';
 import { ThreadType } from '@/types/threads.type';
 import CreateReply from '@/components/CreateReply';
@@ -12,9 +11,6 @@ import ButtonLike from './Button/ButtonLike';
 function StatusImageDialog() {
   const { id } = useParams<{ id: string }>();
   const [threads, setThreads] = useState<ThreadType[] | null>(null);
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [imageUrl] = useState<string>('');
-  const [currentThreadId] = useState<number | null>(null);
   const navigate = useNavigate();
   const { replies } = useReplyStore();
 
@@ -111,13 +107,6 @@ function StatusImageDialog() {
           <CreateReply threadId={thread.id.toString()} />
         </div>
       ))}
-      <ImageDialog
-        threads={threads}
-        threadId={currentThreadId!}
-        isOpen={isDialogOpen}
-        onClose={() => setIsDialogOpen(false)}
-        imageUrl={imageUrl}
-      />
     </div>
   );
 }

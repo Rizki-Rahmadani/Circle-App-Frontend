@@ -20,6 +20,7 @@ export type UserType = {
   fullname: string;
   username: string;
   profile?: {
+    backgroundUrl?: string;
     avatarUrl?: string;
     bio?: string;
   };

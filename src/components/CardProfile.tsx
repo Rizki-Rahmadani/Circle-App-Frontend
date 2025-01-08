@@ -3,17 +3,15 @@ import EditProfile from './EditProfile';
 import useUserStore from './StoreState/userStore';
 import { useEffect } from 'react';
 import { getCurrentUser } from '@/features/dashboard/services/users.services';
-import useFollowStore from './StoreState/useFollowStore';
+import useFollowStore, { FollowedUser } from './StoreState/useFollowStore';
 
 const Profile = () => {
   const user = useUserStore((state) => state.user);
   const setUser = useUserStore((state) => state.setUser);
   const token = localStorage.getItem('auth-token');
   const following = useFollowStore((state) => state.following); // Get following users from the follow store
-  const followers = useFollowStore((state) => state.followers);
 
   const followingCount = following.length; // Get the count of following
-  const followersCount = followers.length; // Get the count of followers
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -21,6 +19,20 @@ const Profile = () => {
         try {
           const userData = await getCurrentUser(token);
           setUser(userData);
+
+          // Tambahkan data followers ke store
+          if (userData.followers) {
+            userData.followers.forEach((follower: FollowedUser) =>
+              useFollowStore.getState().addFollower(follower)
+            );
+          }
+
+          // Tambahkan data following ke store jika diperlukan
+          if (userData.following) {
+            userData.following.forEach((followed: FollowedUser) =>
+              useFollowStore.getState().followUser(followed)
+            );
+          }
         } catch (error) {
           console.error('Error fetching user data:', error);
         }
@@ -82,7 +94,7 @@ const Profile = () => {
           </Box>
           <Box>
             <Card.Description>
-              {user?.followersCount || followersCount} Following
+              {user?.followersCount} Followers
             </Card.Description>
           </Box>
         </Flex>

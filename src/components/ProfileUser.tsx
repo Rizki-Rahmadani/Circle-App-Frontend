@@ -1,8 +1,9 @@
-import { Box, Button, Image, Text, Spinner } from '@chakra-ui/react';
+import { Box, Button, Image, Text, Spinner, Icon } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { getUserById } from '@/features/dashboard/services/users.services';
 import { UserType } from '@/types/threads.type';
+import { HiArrowLeft } from 'react-icons/hi';
 
 const ProfileUser = () => {
   const { id } = useParams();
@@ -49,14 +50,29 @@ const ProfileUser = () => {
   return (
     <Box className="px-5 mt-6">
       <Box position="relative">
-        <Text textStyle="3xl" fontWeight="bold" pb={5}>
+        <Text
+          display={'flex'}
+          alignItems="center"
+          textStyle="3xl"
+          fontWeight="bold"
+          pb={5}
+          gap={4}
+        >
+          <Link to={'/home'}>
+            <Icon size={'2xl'}>
+              <HiArrowLeft />
+            </Icon>
+          </Link>
           ⁖ {user?.fullname || 'Unknown User'}
         </Text>
         <Image
           width="full"
           maxHeight="36"
           rounded="md"
-          src="https://th.bing.com/th/id/R.477f155981dd60768f60ea6f96449b97?rik=YdTS%2f68zhyK6ww&riu=http%3a%2f%2fpapers.co%2fwallpaper%2fpapers.co-sm60-cool-pastel-blur-gradation-green-25-wallpaper.jpg&ehk=RIbtW5PPA10yMRKZ%2flnZGPXJ2xY1pSoqpz3ZOduqDE8%3d&risl=&pid=ImgRaw&r=0"
+          src={
+            user?.profile?.backgroundUrl ||
+            'https://p4.wallpaperbetter.com/wallpaper/324/576/1010/green-emerald-blue-gradation-wallpaper-preview.jpg'
+          }
         />
         <Image
           borderWidth={3}

@@ -9,7 +9,7 @@ export const getSuggestedUsers = async (token: string) => {
       },
     });
 
-    console.log('result', res);
+    console.log('result', res.data);
     return res.data.users;
   } catch (error) {
     if (axios.isAxiosError(error)) {
