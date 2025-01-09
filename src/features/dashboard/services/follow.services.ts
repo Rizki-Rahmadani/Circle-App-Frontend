@@ -4,7 +4,7 @@ import { apiURL } from '@/utils/baseurl';
 export const toggleFollow = async (followingId: number, token: string) => {
   try {
     const res: AxiosResponse = await axios.post(
-      apiURL + '/users/follow', // Endpoint API
+      apiURL + 'users/follow', // Endpoint API
       { targetUserId: followingId }, // Body request
       {
         headers: {
@@ -29,7 +29,7 @@ export const toggleFollow = async (followingId: number, token: string) => {
 
 export const getFollowedUsers = async (token: string) => {
   try {
-    const res: AxiosResponse = await axios.get(apiURL + '/users/following', {
+    const res: AxiosResponse = await axios.get(apiURL + 'users/following', {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -48,7 +48,7 @@ export const getFollowedUsers = async (token: string) => {
 
 export const getFollowers = async (token: string) => {
   try {
-    const res: AxiosResponse = await axios.get(apiURL + '/users/followers', {
+    const res: AxiosResponse = await axios.get(apiURL + 'users/followers', {
       headers: {
         Authorization: `Bearer ${token}`,
       },

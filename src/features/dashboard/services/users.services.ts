@@ -27,7 +27,7 @@ export const getCurrentUser = async (token: string) => {
 
 export const getAllUsers = async (token: string): Promise<User[]> => {
   try {
-    const response: AxiosResponse = await axios.get(apiURL + '/users', {
+    const response: AxiosResponse = await axios.get(apiURL + 'users', {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -50,7 +50,7 @@ export const getAllUsers = async (token: string): Promise<User[]> => {
 export const getUserById = async (id: number, token: string) => {
   try {
     const response: AxiosResponse = await axios.get(
-      apiURL + `/users/author/${id}`,
+      apiURL + `users/author/${id}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
