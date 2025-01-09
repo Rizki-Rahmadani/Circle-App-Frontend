@@ -7,7 +7,7 @@ import DeleteReply from './DeleteReply';
 
 interface ReplyComponentProps {
   threadId: number | undefined;
-  threadAuthorId: number | null;
+  threadAuthorId: number;
 }
 
 function ReplyComponent({ threadId, threadAuthorId }: ReplyComponentProps) {
@@ -63,7 +63,7 @@ function ReplyComponent({ threadId, threadAuthorId }: ReplyComponentProps) {
                 <Text pl={5} textStyle={'lg'}>
                   {reply.author?.fullname || 'Unknown'}
                 </Text>
-                <Flex justifyContent="space-between" w="sm">
+                <Flex justifyContent="space-between" w="4xl">
                   <Box>
                     <Text textStyle={'sm'} pl={2} color={'gray.400'}>
                       @{reply.author?.username || 'Anonymous'} •{' '}

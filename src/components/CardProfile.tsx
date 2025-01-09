@@ -9,9 +9,9 @@ const Profile = () => {
   const user = useUserStore((state) => state.user);
   const setUser = useUserStore((state) => state.setUser);
   const token = localStorage.getItem('auth-token');
-  const following = useFollowStore((state) => state.following); // Get following users from the follow store
+  const following = useFollowStore((state) => state.following);
 
-  const followingCount = following.length; // Get the count of following
+  const followingCount = following.length;
 
   useEffect(() => {
     const fetchUserData = async () => {

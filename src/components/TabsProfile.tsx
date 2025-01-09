@@ -15,9 +15,14 @@ import { getThreadByUser } from '@/features/dashboard/services/myThread.services
 import ImageDialog from './ImageDialog';
 import ButtonLike from './Button/ButtonLike';
 import useThreadStore from './StoreState/useThreadStore';
+import ThreadOptions from './ThreadOptions';
+import { deleteThread } from '@/features/dashboard/services/thread.services';
+import useUserStore from './StoreState/userStore';
 
 const TabsProfile = () => {
-  const { threads, setThreads, fetchThreads } = useThreadStore();
+  const currentUser = useUserStore((state) => state.user);
+  const user = useUserStore((state) => state.user);
+  const { threads, setThreads, fetchThreads, updatedThread } = useThreadStore();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [imageUrl, setImageUrl] = useState<string>('');
   const [currentThreadId, setCurrentThreadId] = useState<number | null>(null);
@@ -45,6 +50,14 @@ const TabsProfile = () => {
     setImageUrl(image);
     setCurrentThreadId(threadId);
     setIsDialogOpen(true);
+  };
+
+  const handleThreadDeleted = (threadId: number) => {
+    deleteThread(threadId);
+  };
+
+  const handleThreadUpdated = (threadId: number, newContent: string) => {
+    updatedThread(threadId, newContent);
   };
 
   const handleUpdateThread = (updatedThread: ThreadType) => {
@@ -82,21 +95,41 @@ const TabsProfile = () => {
                       borderWidth={3}
                       borderColor={'blackAlpha.600'}
                       src={
-                        thread.author?.profile?.avatarUrl ||
+                        user?.avatarUrl ||
                         `https://ui-avatars.com/api/?name=${thread.author?.fullname}&background=27272a&rounded=true&size=60&color=ffffff`
                       }
                       boxSize={'50px'}
                       borderRadius="full"
                       fit="cover"
                     />
-                    <div>
-                      <Text pl={5} textStyle={'lg'}>
-                        {thread.author.fullname}
-                      </Text>
-                      <Text textStyle={'sm'} pl={5} color={'gray.400'}>
-                        @{thread.author.username}
-                      </Text>
-                    </div>
+                    <Flex justifyContent="space-between" w="full">
+                      <div>
+                        <Text pl={5} textStyle={'lg'}>
+                          {thread.author.fullname}
+                        </Text>
+                        <Text textStyle={'sm'} pl={5} color={'gray.400'}>
+                          @{thread.author.username}
+                        </Text>
+                      </div>
+                      <Box>
+                        {currentUser?.id === thread.authorId && (
+                          <div>
+                            <ThreadOptions
+                              threadId={thread.id}
+                              authorId={thread.authorId}
+                              currentUserId={currentUser?.id || 0}
+                              content={thread.content}
+                              onThreadDeleted={() =>
+                                handleThreadDeleted(thread.id)
+                              }
+                              onThreadUpdated={(newContent) =>
+                                handleThreadUpdated(thread.id, newContent)
+                              }
+                            />
+                          </div>
+                        )}
+                      </Box>
+                    </Flex>
                   </div>
                   <div>
                     <Text textStyle={'lg'} pl={5} color={'gray.400'}>

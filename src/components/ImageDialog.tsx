@@ -145,7 +145,10 @@ const ImageDialog: React.FC<ImageDialogProps> = ({
                 <CreateReply threadId={thread?.id.toString() || ''} />
               </Box>
               <Box flex={1} overflowY="auto">
-                <ReplyComponent threadId={thread?.id} />
+                <ReplyComponent
+                  threadId={thread?.id}
+                  threadAuthorId={thread?.author?.id}
+                />
               </Box>
             </Box>
           </Box>

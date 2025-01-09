@@ -1,9 +1,9 @@
 import { apiURL } from '@/utils/baseurl';
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 
 export const getThreadByUser = async (token: string) => {
   try {
-    const res = await axios.get(apiURL + 'thread/me', {
+    const res: AxiosResponse = await axios.get(apiURL + 'thread/me', {
       headers: {
         Authorization: `Bearer ${token}`,
       },

@@ -55,6 +55,9 @@ const ThreadOptions = ({
         allowOutsideClick: false,
         didOpen: () => {
           Swal.showLoading();
+          document
+            .querySelector('.swal2-container')
+            ?.setAttribute('style', 'z-index: 99999 !important');
         },
       });
 
@@ -79,6 +82,8 @@ const ThreadOptions = ({
         icon: 'success',
         title: 'Updated successfully',
       });
+      // Setelah sukses, tutup dialog
+      setEditDialogOpen(false);
     } catch (error) {
       console.error('Error updating thread:', error);
       // Tampilkan notifikasi error

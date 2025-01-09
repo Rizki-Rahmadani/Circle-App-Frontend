@@ -6,6 +6,7 @@ import { registerSchema } from './Schema/registerSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { RegisterFormProps } from '@/types/AuthTypes/LoginFromProps';
 import { registerUser } from '@/features/auth/services/auth-service';
+import Swal from 'sweetalert2';
 
 type Logo = {
   logo: string;
@@ -25,15 +26,46 @@ const RegisterForm: React.FC<Logo> = ({ logo }) => {
     registerUser(data)
       .then((res) => {
         console.log(res);
-        alert('Registration successful!');
+
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+          },
+        });
+
+        Toast.fire({
+          icon: 'success',
+          title: 'Registered successfully',
+        });
+
         navigate('/login');
       })
       .catch((err) => {
         console.error(err);
-        alert(
-          err?.response?.data?.message ||
-            'Registration failed. Please try again.'
-        );
+
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+          },
+        });
+        Toast.fire({
+          icon: 'error',
+          title:
+            err?.response?.data?.message ||
+            'Registration failed. Please try again.',
+        });
       });
   };
 

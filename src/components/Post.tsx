@@ -14,6 +14,7 @@ import { ThreadType } from '@/types/threads.type';
 function Post() {
   const navigate = useNavigate();
   const currentUser = useUserStore((state) => state.user);
+
   const { threads, fetchThreads, setThreads, deleteThread, updatedThread } =
     useThreadStore();
 

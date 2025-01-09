@@ -16,15 +16,22 @@ export const getAllThread = async (token: string) => {
       console.error('Axios Error', error.response?.data || error.message);
       throw new Error(error.response?.data?.message || 'Something went wrong');
     } else {
-      console.error('Unexpected Error:', error);
-      throw error;
+      if (axios.isAxiosError(error)) {
+        console.error('Axios Error', error.response?.data || error.message);
+        throw new Error(
+          error.response?.data?.message || 'Something went wrong'
+        );
+      } else {
+        console.error('Unexpected Error:', error);
+        throw error;
+      }
     }
   }
 };
 
 export const getThreadById = async (token: string, id: string) => {
   try {
-    const res = await axios.get(apiURL + `thread/${id}`, {
+    const res: AxiosResponse = await axios.get(apiURL + `thread/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -37,8 +44,15 @@ export const getThreadById = async (token: string, id: string) => {
       console.error('Axios Error', error.response?.data || error.message);
       throw new Error(error.response?.data?.message || 'Something went wrong');
     } else {
-      console.error('Unexpected Error:', error);
-      throw error;
+      if (axios.isAxiosError(error)) {
+        console.error('Axios Error', error.response?.data || error.message);
+        throw new Error(
+          error.response?.data?.message || 'Something went wrong'
+        );
+      } else {
+        console.error('Unexpected Error:', error);
+        throw error;
+      }
     }
   }
 };
@@ -58,12 +72,16 @@ export const createThread = async (content: string, imageFile?: File) => {
   }
 
   try {
-    const response = await axios.post(apiURL + 'thread', formData, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'multipart/form-data',
-      },
-    });
+    const response: AxiosResponse = await axios.post(
+      apiURL + 'thread',
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+    );
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -72,8 +90,15 @@ export const createThread = async (content: string, imageFile?: File) => {
         error.response?.data?.message || 'Failed to create thread'
       );
     } else {
-      console.error('Unexpected Error:', error);
-      throw error;
+      if (axios.isAxiosError(error)) {
+        console.error('Axios Error', error.response?.data || error.message);
+        throw new Error(
+          error.response?.data?.message || 'Something went wrong'
+        );
+      } else {
+        console.error('Unexpected Error:', error);
+        throw error;
+      }
     }
   }
 };
@@ -83,11 +108,14 @@ export const getAllThreadByAuthorId = async (
   authorId: number
 ) => {
   try {
-    const res = await axios.get(apiURL + `thread/author/${authorId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const res: AxiosResponse = await axios.get(
+      apiURL + `thread/author/${authorId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
 
     console.log('Fetching threads for authorId:', authorId);
 
@@ -98,8 +126,15 @@ export const getAllThreadByAuthorId = async (
       console.error('Axios Error', error.response?.data || error.message);
       throw new Error(error.response?.data?.message || 'Something went wrong');
     } else {
-      console.error('Unexpected Error:', error);
-      throw error;
+      if (axios.isAxiosError(error)) {
+        console.error('Axios Error', error.response?.data || error.message);
+        throw new Error(
+          error.response?.data?.message || 'Something went wrong'
+        );
+      } else {
+        console.error('Unexpected Error:', error);
+        throw error;
+      }
     }
   }
 };
@@ -125,8 +160,15 @@ export const deleteThread = async (threadId: number) => {
         error.response?.data?.message || 'Failed to delete thread'
       );
     } else {
-      console.error('Unexpected Error:', error);
-      throw error;
+      if (axios.isAxiosError(error)) {
+        console.error('Axios Error', error.response?.data || error.message);
+        throw new Error(
+          error.response?.data?.message || 'Something went wrong'
+        );
+      } else {
+        console.error('Unexpected Error:', error);
+        throw error;
+      }
     }
   }
 };
@@ -150,15 +192,24 @@ export const updateThread = async (
   }
 
   try {
-    const response = await axios.put(apiURL + `thread/${threadId}`, formData, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'multipart/form-data',
-      },
-    });
+    const response: AxiosResponse = await axios.put(
+      apiURL + `thread/${threadId}`,
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+    );
     return response.data;
   } catch (error) {
-    console.error('Error updating thread:', error);
-    throw error;
+    if (axios.isAxiosError(error)) {
+      console.error('Axios Error', error.response?.data || error.message);
+      throw new Error(error.response?.data?.message || 'Something went wrong');
+    } else {
+      console.error('Unexpected Error:', error);
+      throw error;
+    }
   }
 };

@@ -14,7 +14,6 @@ const Login: React.FC = () => {
   const [logo] = useState<string>('circle');
   const { setUser } = useUserStore();
   const { initializeLikes } = useLikeStore();
-  // const setUser = useUserStore((state) => state.setUser);
 
   const {
     register,

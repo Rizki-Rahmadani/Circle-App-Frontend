@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Flex, Image, Tabs, Text } from '@chakra-ui/react';
 import {
   getFollowedUsers,
@@ -10,8 +10,8 @@ import useFollowStore, {
 } from '@/components/StoreState/useFollowStore';
 
 function Follows() {
-  const { following, followUser, unfollowUser } = useFollowStore();
-  const [followers, setFollowers] = useState<FollowedUser[]>([]);
+  const { following, followers, followUser, unfollowUser, addFollower } =
+    useFollowStore();
 
   useEffect(() => {
     const fetchFollowData = async () => {
@@ -25,17 +25,15 @@ function Follows() {
           const followerList: FollowedUser[] = await getFollowers(token);
 
           followed.forEach((user: FollowedUser) => followUser(user));
-          setFollowers(followerList);
+          followerList.forEach((user: FollowedUser) => addFollower(user));
         } catch (error) {
           console.error('Error fetching follow data:', error);
         }
       }
     };
 
-    console.log('Data Following:', following);
-
     fetchFollowData();
-  }, [followUser]);
+  }, [followUser, addFollower]);
 
   const handleFollowSuccess = (userId: number) => {
     const user = followers.find((u) => u.id === userId);

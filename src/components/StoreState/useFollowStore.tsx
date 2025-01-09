@@ -9,9 +9,9 @@ export interface FollowedUser {
 }
 
 interface FollowState {
-  following: FollowedUser[]; // Array to store followed user details
+  following: FollowedUser[];
   followers: FollowedUser[];
-  followUser: (user: FollowedUser) => void; // Update to accept a FollowedUser object
+  followUser: (user: FollowedUser) => void;
   unfollowUser: (userId: number) => void;
   addFollower: (user: FollowedUser) => void;
   resetFollow: () => void;

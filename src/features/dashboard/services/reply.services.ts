@@ -1,16 +1,19 @@
 import { apiURL } from '@/utils/baseurl';
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 
 export const getAllReplyThreadById = async (
   token: string,
   threadId: number
 ) => {
   try {
-    const res = await axios.get(apiURL + `thread/reply/${threadId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const res: AxiosResponse = await axios.get(
+      apiURL + `thread/reply/${threadId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
 
     console.log('result', res.data.replies);
     return res.data;
@@ -44,7 +47,7 @@ export const createReply = async (
   }
 
   try {
-    const response = await axios.post(
+    const response: AxiosResponse = await axios.post(
       apiURL + `thread/reply/${threadId}`,
       formData,
       {

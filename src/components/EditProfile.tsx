@@ -17,7 +17,7 @@ import { EditProfileProps } from '@/types/AuthTypes/LoginFromProps';
 import { updateProfile } from '@/features/dashboard/services/profile.services';
 
 const EditProfileDialog: React.FC = () => {
-  const [isDialogOpen, setIsDialogOpen] = useState(false); // Track dialog open state
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const setUser = useUserStore((state) => state.setUser);
   const user = useUserStore((state) => state.user);
   const [avatarFile, setAvatarFile] = useState<File | null>(null);
@@ -51,7 +51,6 @@ const EditProfileDialog: React.FC = () => {
     }
   };
 
-  // Form submit handler
   const onSubmit: SubmitHandler<EditProfileProps> = async (data) => {
     try {
       const token = localStorage.getItem('auth-token');
@@ -76,7 +75,6 @@ const EditProfileDialog: React.FC = () => {
 
       setUser(updatedUser);
 
-      // Tampilkan notifikasi dengan Swal
       Swal.fire({
         position: 'top-end',
         icon: 'success',
@@ -88,7 +86,7 @@ const EditProfileDialog: React.FC = () => {
       // Close the dialog after success
       setIsDialogOpen(false);
     } catch (error) {
-      console.error('Error:', error);
+      console.error(error);
 
       Swal.fire({
         icon: 'error',
@@ -109,7 +107,7 @@ const EditProfileDialog: React.FC = () => {
           height="100%"
           bg="blackAlpha.600"
           zIndex={5}
-          onClick={() => setIsDialogOpen(false)} // Close when clicked outside
+          onClick={() => setIsDialogOpen(false)}
         />
       )}
 
