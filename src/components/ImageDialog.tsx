@@ -147,7 +147,7 @@ const ImageDialog: React.FC<ImageDialogProps> = ({
               <Box flex={1} overflowY="auto">
                 <ReplyComponent
                   threadId={thread?.id}
-                  threadAuthorId={thread?.author?.id}
+                  threadAuthorId={thread?.author?.id ?? null}
                 />
               </Box>
             </Box>

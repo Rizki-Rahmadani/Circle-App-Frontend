@@ -7,7 +7,7 @@ import DeleteReply from './DeleteReply';
 
 interface ReplyComponentProps {
   threadId: number | undefined;
-  threadAuthorId: number;
+  threadAuthorId: number | null | undefined;
 }
 
 function ReplyComponent({ threadId, threadAuthorId }: ReplyComponentProps) {
