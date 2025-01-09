@@ -149,6 +149,7 @@ const CreateThreadDialog: React.FC<CreateThreadDialogProps> = ({
             placeholder="What is happening?!"
             value={threadContent}
             onChange={(e) => setThreadContent(e.target.value)}
+            color={'white'}
           />
           {imagePreview && (
             <Flex
