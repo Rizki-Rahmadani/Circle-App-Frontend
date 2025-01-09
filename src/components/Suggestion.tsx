@@ -74,8 +74,8 @@ const Suggested = () => {
   };
 
   return (
-    <Card.Root maxW="sm" maxH="xs" mt={5} py={5}>
-      <Card.Title pl={5} fontWeight={'bolder'} color={'whiteAlpha.700'}>
+    <Card.Root maxW="sm" maxH="xs" mt={5} py={5} bg="blackAlpha.800">
+      <Card.Title pl={5} fontWeight={'bolder'} color={'white'}>
         Suggested for you
       </Card.Title>
       <ul>
@@ -99,7 +99,7 @@ const Suggested = () => {
                   onClick={() => navigate(`/profile/${suggest.id}`)}
                   style={{ cursor: 'pointer' }}
                 >
-                  <Card.Title textStyle={'sm'} color={'whiteAlpha.700'}>
+                  <Card.Title textStyle={'sm'} color={'white'}>
                     {suggest.fullname}
                   </Card.Title>
                   <Card.Title textStyle={'xs'} color={'whiteAlpha.700'}>

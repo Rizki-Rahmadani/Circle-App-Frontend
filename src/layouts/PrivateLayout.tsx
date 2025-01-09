@@ -33,7 +33,7 @@ const PrivateLayout: React.FC = () => {
     });
   };
   return (
-    <Box display={'flex'} backgroundColor={'blackAlpha.900'}>
+    <Box display={'flex'} backgroundColor={'black'}>
       <Box w={'2/5'} px={10}>
         <Navbar onclick={onLogout} />
       </Box>

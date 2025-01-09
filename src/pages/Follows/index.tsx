@@ -62,10 +62,20 @@ function Follows() {
             <h1 className="text-4xl font-bold pb-5">Follows</h1>
           </div>
           <Tabs.List>
-            <Tabs.Trigger value="follow" w={'1/2'} justifyContent={'center'}>
+            <Tabs.Trigger
+              value="follow"
+              w={'1/2'}
+              justifyContent={'center'}
+              color={'white'}
+            >
               Following
             </Tabs.Trigger>
-            <Tabs.Trigger value="Followers" w={'1/2'} justifyContent={'center'}>
+            <Tabs.Trigger
+              value="Followers"
+              w={'1/2'}
+              justifyContent={'center'}
+              color={'white'}
+            >
               Followers
             </Tabs.Trigger>
           </Tabs.List>
@@ -88,7 +98,9 @@ function Follows() {
                         fit="cover"
                       />
                       <div className="pl-5 w-full">
-                        <Text textStyle="sm">{user.fullname}</Text>
+                        <Text textStyle="sm" color={'white'}>
+                          {user.fullname}
+                        </Text>
                         <Text textStyle="xs" color="gray.400">
                           {user.username}
                         </Text>
@@ -131,7 +143,9 @@ function Follows() {
                           fit="cover"
                         />
                         <div className="pl-5 w-full">
-                          <Text textStyle="sm">{user.fullname}</Text>
+                          <Text textStyle="sm" color={'white'}>
+                            {user.fullname}
+                          </Text>
                           <Text textStyle="xs" color="gray.400">
                             {user.username}
                           </Text>

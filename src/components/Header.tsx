@@ -12,7 +12,7 @@ const Header = () => {
 
   return (
     <div className="px-5 mt-6">
-      <h1 className="text-4xl font-bold pb-5">Feed</h1>
+      <h1 className="text-4xl font-bold pb-5 text-white">Feed</h1>
       <div className="flex gap-5 mb-5">
         <Image
           borderWidth={3}

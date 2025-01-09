@@ -90,10 +90,10 @@ const Login: React.FC = () => {
 
   // Render komponen login
   return (
-    <div className="flex flex-col justify-center items-center py-10">
+    <div className="flex flex-col pt-20 items-center py-10 bg-black w-full h-screen">
       <div>
         <h1 className="text-green-500 text-4xl font-bold">{logo}</h1>
-        <h1>Login to Circle</h1>
+        <h1 className="text-white">Login to Circle</h1>
         <form onSubmit={handleSubmit(onSubmit)} className="pt-3">
           <Stack gap="4" width={300}>
             <Input
@@ -113,14 +113,17 @@ const Login: React.FC = () => {
             {errors.password && (
               <p className="text-red-500">*{errors.password.message}</p>
             )}
-            <Link to="/forgot-password" className="flex justify-end text-sm">
+            <Link
+              to="/forgot-password"
+              className="flex justify-end text-sm text-white"
+            >
               Forgot password?
             </Link>
             <Button type="submit" className="bg-green-500" rounded={20}>
               Login
             </Button>
           </Stack>
-          <p className="text-sm">
+          <p className="text-sm text-white">
             Don't have an account yet?
             <Link className="text-green-500" to="/register">
               Create account

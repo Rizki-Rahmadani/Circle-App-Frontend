@@ -50,21 +50,29 @@ const ProfilePage = () => {
           px={3}
           fontSize={'sm'}
           borderRadius={'full'}
+          color={'white'}
         >
           <EditProfile />
         </Button>
       </div>
 
-      <Text textStyle={'2xl'} fontWeight={'bold'}>
+      <Text textStyle={'2xl'} fontWeight={'bold'} color={'white'}>
         ⁖ {user?.fullname}
       </Text>
-      <Text textStyle={'lg'} color={'whiteAlpha.600'}>
+      <Text textStyle={'lg'} color={'white'}>
         @{user?.username}
       </Text>
-      <Text textStyle={'lg'}>{user?.bio}</Text>
+      <Text textStyle={'lg'} color={'white'}>
+        {user?.bio}
+      </Text>
       <div className="flex gap-5">
         <div className="flex gap-2">
-          <Text textStyle="lg" fontWeight="medium" letterSpacing="tight">
+          <Text
+            textStyle="lg"
+            fontWeight="medium"
+            letterSpacing="tight"
+            color={'white'}
+          >
             {followingCount}
           </Text>
           <Text
@@ -77,7 +85,12 @@ const ProfilePage = () => {
           </Text>
         </div>
         <div className="flex gap-2">
-          <Text textStyle="lg" fontWeight="medium" letterSpacing="tight">
+          <Text
+            textStyle="lg"
+            fontWeight="medium"
+            letterSpacing="tight"
+            color={'white'}
+          >
             {user?.followersCount}
           </Text>
           <Text

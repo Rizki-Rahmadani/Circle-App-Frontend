@@ -8,11 +8,11 @@ function Status() {
     <div className="border-x border-y pt-6 border-neutral-500">
       <div className="flex px-5 mb-5 items-center gap-4">
         <Link to={'/home'}>
-          <Icon size={'2xl'}>
+          <Icon size={'2xl'} color="white">
             <HiArrowLeft />
           </Icon>
         </Link>
-        <h1 className="text-4xl font-bold">Status</h1>
+        <h1 className="text-4xl font-bold text-white">Status</h1>
       </div>
       <StatusComponent />
     </div>

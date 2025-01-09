@@ -73,7 +73,7 @@ function StatusComponent() {
                 src={thread.author?.profile?.avatarUrl || 'default-avatar-url'}
               />
               <div>
-                <Text pl={5} textStyle={'lg'}>
+                <Text pl={5} textStyle={'lg'} color={'white'}>
                   {thread.author?.fullname || 'Unknown Author'}
                 </Text>
                 <Text textStyle={'sm'} pl={5} color={'gray.400'}>
@@ -100,7 +100,7 @@ function StatusComponent() {
                 <ButtonLike thread={thread} onUpdate={handleUpdateThread} />
               </div>
               <div>
-                <Button>
+                <Button color={'white'}>
                   <Icon size={'lg'}>
                     <HiChat />
                   </Icon>

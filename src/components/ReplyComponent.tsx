@@ -36,7 +36,7 @@ function ReplyComponent({ threadId, threadAuthorId }: ReplyComponentProps) {
   }
 
   if (!replies.length) {
-    return <Text>No replies found</Text>;
+    return <Text color={'white'}>No replies found</Text>;
   }
 
   return (
@@ -60,7 +60,7 @@ function ReplyComponent({ threadId, threadAuthorId }: ReplyComponentProps) {
           <div>
             <div className="flex flex-col">
               <div className="flex">
-                <Text pl={5} textStyle={'lg'}>
+                <Text pl={5} textStyle={'lg'} color={'white'}>
                   {reply.author?.fullname || 'Unknown'}
                 </Text>
                 <Flex justifyContent="space-between" w="4xl">

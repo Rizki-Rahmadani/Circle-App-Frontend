@@ -125,16 +125,17 @@ const ThreadOptions = ({
           aria-label="Thread options"
           variant="ghost"
           size="sm"
+          color={'white'}
         >
           <BsThreeDots />
         </MenuButton>
-        <MenuList bg="gray.800">
+        <MenuList bg="whitesmoke" p={3} borderRadius={4}>
           {currentUserId === authorId && (
             <>
               <MenuItem
                 icon={<FiEdit2 />}
                 onClick={() => setEditDialogOpen(true)}
-                _hover={{ bg: 'gray.700' }}
+                _hover={{ bg: 'whiteAlpha.700' }}
               >
                 Edit
               </MenuItem>
@@ -155,16 +156,18 @@ const ThreadOptions = ({
         open={isEditDialogOpen}
         onOpenChange={(details) => setEditDialogOpen(details.open)}
       >
-        <DialogContent>
+        <DialogContent bg="black">
           <DialogHeader
             display={'flex'}
             justifyContent={'center'}
             fontSize={'2xl'}
+            color={'white'}
           >
             Edit Thread
           </DialogHeader>
           <DialogBody>
             <Textarea
+              color={'white'}
               value={newContent}
               onChange={(e) => setNewContent(e.target.value)}
               placeholder="Edit your thread content here..."
@@ -202,15 +205,26 @@ const ThreadOptions = ({
               aria-label="Upload Image"
               onClick={() => document.getElementById('image-upload')?.click()}
               marginTop="10px"
+              color={'white'}
             >
               <LuImagePlus />
             </IconButton>
           </DialogBody>
           <DialogFooter>
-            <Button colorScheme="blue" onClick={handleEdit}>
+            <Button
+              colorScheme="blue"
+              bg={'green.500'}
+              p={5}
+              onClick={handleEdit}
+            >
               Save
             </Button>
-            <Button variant="ghost" onClick={() => setEditDialogOpen(false)}>
+            <Button
+              variant="ghost"
+              bg={'red.500'}
+              p={5}
+              onClick={() => setEditDialogOpen(false)}
+            >
               Cancel
             </Button>
           </DialogFooter>

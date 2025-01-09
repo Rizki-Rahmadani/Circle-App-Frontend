@@ -118,7 +118,7 @@ const SearchFollowers: React.FC = () => {
               </div>
               <div style={{ flex: 1 }}>
                 <Link to={`/profile/${item.id}`}>
-                  <strong>{item.fullname}</strong>
+                  <strong className="text-white">{item.fullname}</strong>
                   <p style={{ margin: 0, color: '#888' }}>@{item.username}</p>
                 </Link>
               </div>

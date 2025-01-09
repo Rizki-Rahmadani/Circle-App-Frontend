@@ -215,6 +215,7 @@ const EditProfileDialog: React.FC = () => {
                     })}
                     placeholder="Username"
                     bg="gray.800"
+                    color={'whiteAlpha.800'}
                     borderColor="green.500"
                     _hover={{ borderColor: 'green.500' }}
                   />
@@ -222,6 +223,7 @@ const EditProfileDialog: React.FC = () => {
                     {...register('fullname')}
                     placeholder="Full Name"
                     bg="gray.800"
+                    color={'whiteAlpha.800'}
                     borderColor="green.500"
                     _hover={{ borderColor: 'green.500' }}
                   />
@@ -229,6 +231,7 @@ const EditProfileDialog: React.FC = () => {
                     {...register('bio')}
                     placeholder="Bio"
                     bg="gray.800"
+                    color={'whiteAlpha.800'}
                     borderColor="green.500"
                     _hover={{ borderColor: 'green.500' }}
                   />

@@ -27,13 +27,13 @@ const Navbar: React.FC<NavbarProps> = ({ onclick }) => {
       <nav className="flex flex-col w-full justify-between pb-5">
         <div className="flex flex-col space-y-5 text-xl px-8 mt-6">
           <h1 className="text-5xl font-bold text-green-500">{logo}</h1>
-          <Link to="/home" className="flex gap-3">
+          <Link to="/home" className="flex gap-3 text-white">
             <Icon fontSize="2xl" color="white.700">
               {location.pathname === '/home' ? <HiHome /> : <HiOutlineHome />}
             </Icon>
             Home
           </Link>
-          <Link to="/my-profile" className="flex gap-3">
+          <Link to="/my-profile" className="flex gap-3 text-white">
             <Icon fontSize="2xl" color="white.700">
               {location.pathname === '/profile' ? (
                 <HiUser />
@@ -43,7 +43,7 @@ const Navbar: React.FC<NavbarProps> = ({ onclick }) => {
             </Icon>
             Profile
           </Link>
-          <Link to="/search" className="flex gap-3 ">
+          <Link to="/search" className="flex gap-3 text-white ">
             <Icon fontSize="2xl" color="white.700">
               {location.pathname === '/search' ? (
                 <HiSearchCircle />
@@ -53,7 +53,7 @@ const Navbar: React.FC<NavbarProps> = ({ onclick }) => {
             </Icon>
             Search
           </Link>
-          <Link to="/follows" className="flex gap-3">
+          <Link to="/follows" className="flex gap-3 text-white">
             <Icon fontSize="2xl" color="white.700">
               {location.pathname === '/follows' ? (
                 <HiHeart />
@@ -74,7 +74,7 @@ const Navbar: React.FC<NavbarProps> = ({ onclick }) => {
           </Button>
         </div>
         <div>
-          <Button onClick={onclick} className="flex gap-3">
+          <Button onClick={onclick} className="flex gap-3 text-white">
             <Icon fontSize="2xl" color="white.700">
               <HiLogout />
             </Icon>

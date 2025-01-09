@@ -2,9 +2,9 @@ import { Card, Heading, Link, Text } from '@chakra-ui/react';
 
 const Footer = () => {
   return (
-    <Card.Root size="sm" my={5}>
+    <Card.Root size="sm" my={5} bg="blackAlpha.800">
       <Card.Header className="flex flex-row">
-        <Heading size="sm" textStyle={'sm'}>
+        <Heading size="sm" textStyle={'sm'} color={'white'}>
           Developer by{' '}
           <span className="text-green-500">Rizki Rahmadani • </span>
         </Heading>
@@ -30,9 +30,11 @@ const Footer = () => {
         color="fg.muted"
         className="flex flex-row items-center text-xs gap-1"
       >
-        <Text className="gap-1">Powered by</Text>
+        <Text className="gap-1 text-white">Powered by</Text>
         <img src="../src/assets/dumbways.png" alt="" width={20} />
-        <Text>Dumbways Indonesia • #1CodingBootcamp</Text>
+        <Text className="text-white">
+          Dumbways Indonesia • #1CodingBootcamp
+        </Text>
       </Card.Body>
     </Card.Root>
   );

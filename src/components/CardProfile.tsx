@@ -43,9 +43,11 @@ const Profile = () => {
   }, [token, setUser]);
 
   return (
-    <Card.Root maxW="sm" maxH="xs" mt={10} px={5}>
+    <Card.Root maxW="sm" maxH="xs" mt={10} px={5} bg="blackAlpha.800">
       <Box position={'relative'}>
-        <Card.Title py={2}>My Profile </Card.Title>
+        <Card.Title py={2} color="white">
+          My Profile{' '}
+        </Card.Title>
         <Image
           width={'sm'}
           maxHeight={100}
@@ -77,6 +79,7 @@ const Profile = () => {
           border={'solid'}
           borderWidth={'1px'}
           p={3}
+          color="white"
           fontSize={'xs'}
           borderRadius={'full'}
         >
@@ -85,15 +88,19 @@ const Profile = () => {
       </div>
 
       <Box py={2}>
-        <Card.Title>⁖ {user?.fullname}</Card.Title>
-        <Card.Description>@{user?.username}</Card.Description>
-        <Card.Description>{user?.bio}</Card.Description>
+        <Card.Title className="text-white">⁖ {user?.fullname}</Card.Title>
+        <Card.Description color="whiteAlpha.700">
+          @{user?.username}
+        </Card.Description>
+        <Card.Description color="whiteAlpha.700">{user?.bio}</Card.Description>
         <Flex align="center" spaceX="2">
           <Box>
-            <Card.Description>{followingCount} Following</Card.Description>
+            <Card.Description color="whiteAlpha.700">
+              {followingCount} Following
+            </Card.Description>
           </Box>
           <Box>
-            <Card.Description>
+            <Card.Description color="whiteAlpha.700">
               {user?.followersCount} Followers
             </Card.Description>
           </Box>

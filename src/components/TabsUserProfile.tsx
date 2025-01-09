@@ -74,15 +74,25 @@ const TabsUserProfile = () => {
       <main className="w-full border-neutral-500">
         <Tabs.Root defaultValue={'all-post'}>
           <Tabs.List>
-            <Tabs.Trigger value="all-post" w={'1/2'} justifyContent={'center'}>
+            <Tabs.Trigger
+              value="all-post"
+              w={'1/2'}
+              justifyContent={'center'}
+              color={'white'}
+            >
               All Post
             </Tabs.Trigger>
-            <Tabs.Trigger value="media" w={'1/2'} justifyContent={'center'}>
+            <Tabs.Trigger
+              value="media"
+              w={'1/2'}
+              justifyContent={'center'}
+              color={'white'}
+            >
               Media
             </Tabs.Trigger>
           </Tabs.List>
 
-          <Tabs.Content value="all-post">
+          <Tabs.Content value="all-post" color={'white'}>
             {threads.map((thread, index) => (
               <Box
                 borderBottomWidth={'thin'}

@@ -58,7 +58,7 @@ function Post() {
         />
         <div className="flex flex-col">
           <div className="flex">
-            <Text pl={5} textStyle={'lg'}>
+            <Text pl={5} textStyle={'lg'} className="text-white">
               {thread.author?.fullname}
             </Text>
             <Flex justifyContent={'space-between'} w="4xl">
@@ -96,7 +96,7 @@ function Post() {
 
           <div className="flex gap-4 pl-3 pt-2 items-center">
             <ButtonLike thread={thread} onUpdate={handleUpdateThread} />
-            <Button textStyle={'sm'}>
+            <Button textStyle={'sm'} className="text-white">
               <Icon size={'lg'}>
                 <HiChat />
               </Icon>

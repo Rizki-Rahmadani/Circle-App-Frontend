@@ -70,10 +70,10 @@ const RegisterForm: React.FC<Logo> = ({ logo }) => {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center py-10">
+    <div className="flex flex-col pt-20 items-center py-10 bg-black w-full h-screen">
       <div className="">
         <h1 className="text-green-500 text-4xl font-bold">{logo}</h1>
-        <h1>Create accout Circle</h1>
+        <h1 className="text-white">Create accout Circle</h1>
         <form onSubmit={handleSubmit(onSubmit)} className="pt-3">
           <Stack gap="4" width={300}>
             <Input
@@ -81,25 +81,31 @@ const RegisterForm: React.FC<Logo> = ({ logo }) => {
               placeholder="Username"
               variant="subtle"
             />
-            {errors.username && <p>{errors.username.message}</p>}
+            {errors.username && (
+              <p className="text-red-500">*{errors.username.message}</p>
+            )}
             <Input
               {...register('email')}
               placeholder="Email"
               variant="subtle"
             />
-            {errors.email && <p>{errors.email.message}</p>}
+            {errors.email && (
+              <p className="text-red-500">*{errors.email.message}</p>
+            )}
             <Input
               {...register('password')}
               placeholder="Password"
               variant="subtle"
               type="password"
             />
-            {errors.password && <p>{errors.password.message}</p>}
+            {errors.password && (
+              <p className="text-red-500">*{errors.password.message}</p>
+            )}
             <Button type="submit" className="bg-green-500" rounded={20}>
               Create
             </Button>
           </Stack>
-          <p className="text-sm">
+          <p className="text-sm text-white">
             Already have account?
             <Link to="/login" className="text-green-500">
               Login

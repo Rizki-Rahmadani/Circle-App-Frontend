@@ -73,10 +73,20 @@ const TabsProfile = () => {
       <main className="w-full h-full border-neutral-500">
         <Tabs.Root defaultValue={'all-post'}>
           <Tabs.List>
-            <Tabs.Trigger value="all-post" w={'1/2'} justifyContent={'center'}>
+            <Tabs.Trigger
+              value="all-post"
+              w={'1/2'}
+              justifyContent={'center'}
+              color={'white'}
+            >
               All Post
             </Tabs.Trigger>
-            <Tabs.Trigger value="media" w={'1/2'} justifyContent={'center'}>
+            <Tabs.Trigger
+              value="media"
+              w={'1/2'}
+              justifyContent={'center'}
+              color={'white'}
+            >
               Media
             </Tabs.Trigger>
           </Tabs.List>
@@ -104,7 +114,7 @@ const TabsProfile = () => {
                     />
                     <Flex justifyContent="space-between" w="full">
                       <div>
-                        <Text pl={5} textStyle={'lg'}>
+                        <Text pl={5} textStyle={'lg'} color={'white'}>
                           {thread.author.fullname}
                         </Text>
                         <Text textStyle={'sm'} pl={5} color={'gray.400'}>
@@ -155,7 +165,7 @@ const TabsProfile = () => {
                       />
                     </div>
                     <div>
-                      <Button>
+                      <Button color={'white'}>
                         <Icon size={'lg'}>
                           <HiChat />
                         </Icon>

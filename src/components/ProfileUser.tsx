@@ -59,7 +59,7 @@ const ProfileUser = () => {
           gap={4}
         >
           <Link to={'/home'}>
-            <Icon size={'2xl'}>
+            <Icon size={'2xl'} color={'white'}>
               <HiArrowLeft />
             </Icon>
           </Link>
@@ -90,36 +90,48 @@ const ProfileUser = () => {
         />
       </Box>
 
-      <Text textStyle="2xl" fontWeight="bold" mt="10">
+      <Text textStyle="2xl" fontWeight="bold" mt="10" color={'white'}>
         ⁖ {user?.fullname || 'Unknown User'}
       </Text>
-      <Text textStyle="lg" color="whiteAlpha.600">
+      <Text textStyle="lg" color={'white'}>
         @{user?.username || 'Unknown Username'}
       </Text>
-      <Text textStyle="lg">{user?.profile?.bio || 'No Bio available'}</Text>
+      <Text textStyle="lg" color={'white'}>
+        {user?.profile?.bio || 'No Bio available'}
+      </Text>
       <Box className="flex gap-5">
         <Box className="flex gap-2">
-          <Text textStyle="lg" fontWeight="medium" letterSpacing="tight">
+          <Text
+            textStyle="lg"
+            fontWeight="medium"
+            letterSpacing="tight"
+            color={'white'}
+          >
             {user?.followingCount || 0}
           </Text>
           <Text
             textStyle="lg"
             fontWeight="medium"
             letterSpacing="tight"
-            color="whiteAlpha.600"
+            color={'white'}
           >
             Following
           </Text>
         </Box>
         <Box className="flex gap-2">
-          <Text textStyle="lg" fontWeight="medium" letterSpacing="tight">
+          <Text
+            textStyle="lg"
+            fontWeight="medium"
+            letterSpacing="tight"
+            color={'white'}
+          >
             {user?.followersCount || 0}
           </Text>
           <Text
             textStyle="lg"
             fontWeight="medium"
             letterSpacing="tight"
-            color="whiteAlpha.600"
+            color={'white'}
           >
             Followers
           </Text>
